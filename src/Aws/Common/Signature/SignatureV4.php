@@ -50,6 +50,9 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
     /** @var int Size of the hash cache */
     protected $cacheSize = 0;
 
+    /** @var string */
+    private $host = null;
+
     /**
      * @param string $serviceName Bind the signing to a particular service name
      * @param string $regionName  Bind the signing to a particular region name
@@ -333,6 +336,9 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
                     sort($values);
                     $values = implode(',', $values);
                 }
+                if ($key === 'host' && !empty($this->host)) {
+                    $values = $this->host;
+                }
                 $canonHeaders[$key] = $key . ':' . preg_replace('/\s+/', ' ', $values);
             }
         }
@@ -473,5 +479,13 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
                 $request->removeHeader($name);
             }
         }
+    }
+
+    /**
+     * @param string $host
+     */
+    public function setSignatureHost($host)
+    {
+        $this->host = $host;
     }
 }

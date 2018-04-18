@@ -116,6 +116,11 @@ class ClientOptions extends Enum
     const SIGNATURE_REGION = 'signature.region';
 
     /**
+     * @var string Set to explicitly override the host used in signatures
+     */
+    const SIGNATURE_HOST = 'signature.host';
+
+    /**
      * @var string Option key holding an exponential backoff plugin
      */
     const BACKOFF = 'client.backoff';

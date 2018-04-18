@@ -392,6 +392,7 @@ class ClientBuilder
         if (is_string($signature)) {
             if ($signature == 'v4') {
                 $signature = new SignatureV4();
+                $signature->setSignatureHost($config->get(Options::SIGNATURE_HOST));
             } elseif ($signature == 'v2') {
                 $signature = new SignatureV2();
             } elseif ($signature == 'v3https') {
