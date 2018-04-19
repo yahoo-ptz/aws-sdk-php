@@ -287,7 +287,8 @@ class S3Client extends AbstractClient
         if ($currentValue == 'v4' || $requiresV4) {
             // Force SignatureV4 for specific regions or if specified in the config
             $currentValue = new S3SignatureV4('s3');
-            $currentValue->setSignatureHost($config[Options::SIGNATURE_HOST]);
+            $host = isset($config[Options::SIGNATURE_HOST]) ? $config[Options::SIGNATURE_HOST] : '';
+            $currentValue->setSignatureHost($host);
         } elseif (!$currentValue || $currentValue == 's3') {
             // Use the Amazon S3 signature by default
             $currentValue = new S3Signature();
